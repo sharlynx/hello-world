@@ -49,6 +49,12 @@ it conventionally returns a result that is valid Python syntax,
 which could be used to unambiguously recreate the object it represents.
 '''
 
+'''
+Use the %r for debugging, since it displays the "raw" data of the variable, b
+ut the others are used for displaying to users.
+'''
+
+
 words = "There are %s types of people." % 10
 print "He said, %s." % words
 print "He said, %r." % words
