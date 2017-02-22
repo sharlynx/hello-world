@@ -1,2 +1,1 @@
-# hello-world
-mark my day of statistics alive
+# Learn Python the Hard Way 
