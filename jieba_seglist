@@ -1,0 +1,32 @@
+# encoding=utf-8
+
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import jieba
+from collections import Counter
+
+# 获取文字
+html = urlopen("https://raw.githubusercontent.com/OpenMindClub/DeepLearningStartUp/master/happiness_seg.txt")
+bs0bj = BeautifulSoup(html.read(), "lxml")
+text = bs0bj.html.body.p.get_text().strip()
+
+# 清理空格和换行符
+jiebatext = text.replace(" ", "")
+jiebatext = jiebatext.replace("\n", "")
+
+# 分词
+seg_list = jieba.cut(jiebatext, cut_all = False)
+resultList = list(seg_list)
+binaryword = []
+
+# 取连续的二元词组
+for i in range(0, len(resultList)-1):
+    if (len(resultList[i] ) == 2 and len(resultList[i+1]) == 2):
+        binaryword.append(resultList[i] + "_" + resultList[i+1])
+
+# 用Counter来统计词频
+words = Counter(binaryword)
+top = words.most_common(10)
+
+for word in top:
+    print  ("%s,%d" %(word[0], word[1]))
